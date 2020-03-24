@@ -19,6 +19,7 @@
   "homepage": "https://github.com/jm27/E-Commerce-MERN#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.9.6"
   }
 }
