@@ -1,5 +1,9 @@
 const express = require('express');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const morgan = require('morgan'); // see routes on console
+const bodyParser = require('body-parser')// helps paste objects
+const cookieParser = require('cookie-parser')// save users cookie
+
 require('dotenv').config()
 // import routes
 
@@ -14,6 +18,12 @@ mongoose.connect(process.env.DATABASE,{
     useNewUrlParser: true,
     useCreateindex: true
 }).then(()=> console.log('DB connected'))
+
+//Middleware
+app.use(morgan('dev'))
+app.use(bodyParser.json())
+app.use(cookieParser())
+
 
 //Routes midlleware
 app.use("/api",userRoute)
