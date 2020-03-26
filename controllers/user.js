@@ -1,4 +1,6 @@
 const User = require('../models/user')
+const {errorHandler} = require('../helpers/dbErrorHandler')
+
 
 exports.signUp = (req, res) => {
     console.log('req.body', req.body)
@@ -6,9 +8,11 @@ exports.signUp = (req, res) => {
     user.save((err, user)=>{
         if(err){
             return res.status(400).json({
-                error
+                err: errorHandler(err)
             })
         }
+        user.salt = undefined
+        user.hashed_password = undefined
         res.json({
             user
         });
