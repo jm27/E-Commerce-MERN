@@ -7,6 +7,7 @@ const expressValidator = require('express-validator')
 require('dotenv').config()
 // import routes
 
+const authRoute = require('./routes/auth')
 const userRoute = require('./routes/user')
 
 //App
@@ -27,6 +28,7 @@ app.use(cookieParser())
 app.use(expressValidator())
 
 //Routes midlleware
+app.use("/api",authRoute)
 app.use("/api",userRoute)
 
 const port = process.env.PORT || 8000
