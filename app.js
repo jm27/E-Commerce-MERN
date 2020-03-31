@@ -9,6 +9,7 @@ require('dotenv').config()
 
 const authRoute = require('./routes/auth')
 const userRoute = require('./routes/user')
+const categoryRoute = require('./routes/category')
 
 //App
 
@@ -30,6 +31,7 @@ app.use(expressValidator())
 //Routes midlleware
 app.use("/api",authRoute)
 app.use("/api",userRoute)
+app.use("/api",categoryRoute)
 
 const port = process.env.PORT || 8000
 
