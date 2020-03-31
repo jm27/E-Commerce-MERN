@@ -25,7 +25,7 @@ exports.create = (req, res) => {
         product.save((err, result) => {
             if(err) {
                 return res.status(400).json({
-                    error: errorHandler(error)
+                    error: errorHandler(err)
                 })
             }
             res.json(result);
