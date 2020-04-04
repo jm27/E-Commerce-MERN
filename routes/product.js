@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { create, productById, read, remove } = require("../controllers/product");
+const { create, productById, read, remove, update } = require("../controllers/product");
 const { requireSignIn, isAuth, isAdmin } = require("../controllers/auth");
 const { userById } = require("../controllers/user");
 
@@ -13,6 +13,13 @@ router.delete(
   isAuth,
   isAdmin,
   remove
+);
+router.put(
+  "/product/:productId/:userId",
+  requireSignIn,
+  isAuth,
+  isAdmin,
+  update
 );
 
 router.param("userId", userById);
