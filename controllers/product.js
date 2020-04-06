@@ -182,3 +182,14 @@ exports.listRelated = (req, res) =>{
     res.json(product)
   })
 }
+
+exports.listCategories = (req, res) => {
+  Product.distinct('category', {}, (err, categories)=> {
+    if (err) {
+      return res.status(400).json({
+        error: 'Product not found!'
+      })
+    }
+    res.json(categories)
+  })
+}
