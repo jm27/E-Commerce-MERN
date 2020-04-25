@@ -4,7 +4,7 @@ const App = () => {
   const [letter, setLetter] = useState('j')
 
   return(<div>
-    Hello Amigos
+    Hello Amigos , {letter}
   </div>)
 }
 export default App;
