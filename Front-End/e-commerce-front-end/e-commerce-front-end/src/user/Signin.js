@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Layout from "../core/Layout";
-import {signIn} from '../auth';
+import { signIn, authenticate } from "../auth";
 
 const SignIn = () => {
   const [values, setValues] = useState({
@@ -9,28 +9,28 @@ const SignIn = () => {
     password: "",
     error: "",
     loading: false,
-    redirectToReferrer:false,
+    redirectToReferrer: false,
   });
 
-  const {  email, password, loading, error, redirectToReferrer } = values;
+  const { email, password, loading, error, redirectToReferrer } = values;
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    setValues({ ...values, error: false, loading:true });
-    signIn({  email, password }).then((data) => {
-      console.log(data)
+    setValues({ ...values, error: false, loading: true });
+    signIn({ email, password }).then((data) => {
+      console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
-        setValues({
-          ...values,
-          redirectToReferrer: true,
+        authenticate(data, () => {
+          setValues({
+            ...values,
+            redirectToReferrer: true,
+          });
         });
       }
     });
@@ -70,15 +70,18 @@ const SignIn = () => {
       {error}
     </div>
   );
-  const showLoading = () => (
-loading && (<div className='alert alert-info'><h2>Loading..</h2></div>)
-  );
+  const showLoading = () =>
+    loading && (
+      <div className="alert alert-info">
+        <h2>Loading..</h2>
+      </div>
+    );
 
-  const redirectUser = ()=>{
-      if(redirectToReferrer) {
-          return <Redirect to="/"/>
-      }
-  }
+  const redirectUser = () => {
+    if (redirectToReferrer) {
+      return <Redirect to="/" />;
+    }
+  };
 
   return (
     <Layout
