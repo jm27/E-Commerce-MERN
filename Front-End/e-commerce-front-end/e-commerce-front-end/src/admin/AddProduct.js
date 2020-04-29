@@ -37,15 +37,105 @@ const AddProduct = () => {
     formData,
   } = values;
 
-  const newPostForm = ()=>(
-      <form className='mb-3'>
-          <h4>Post Photo</h4>
-          <div className='form-group'>
-              <label></label>
-              <input type='file' name='photo' accept='image/*'></input>
-          </div>
-      </form>
-  )
+  useEffect(() => {
+    setValues({ ...values, formData: new FormData() });
+  }, []);
+
+  const handleChange = (name) => (event) => {
+    // if photo or not
+    const value = name === "photo" ? event.target.files[0] : event.target.value;
+    formData.set(name, value);
+    setValues({ ...values, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setValues({ ...values, error: "", loading: true });
+    createProduct(user._id, token, formData).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({
+          ...values,
+          name: "",
+          description: "",
+          photo: "",
+          price: '',
+          quantity: '',
+          loading: false,
+          createdProduct: data.name,
+
+        });
+      }
+    });
+  };
+
+  const newPostForm = () => (
+    <form className="mb-3" onSubmit={handleSubmit}>
+      <h4>Post Photo</h4>
+      <div className="form-group">
+        <label className="btn btn-secondary">
+          <input
+            onChange={handleChange("photo")}
+            type="file"
+            name="photo"
+            accept="image/*"
+          ></input>
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label className="text-muted">Name</label>
+        <input
+          onChange={handleChange("name")}
+          type="text"
+          className="form-control"
+          val={name}
+        ></input>
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Description</label>
+        <textarea
+          onChange={handleChange("description")}
+          className="form-control"
+          val={description}
+        ></textarea>
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Price</label>
+        <input
+          onChange={handleChange("price")}
+          type="number"
+          className="form-control"
+          val={price}
+        ></input>
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Category</label>
+        <select onChange={handleChange("category")} className="form-control">
+          <option value="5e8aa62087d287202ca1d745">Python</option>
+          <option value="5e8aa62087d287202ca1d745">PHP</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Quantity</label>
+        <input
+          onChange={handleChange("quantity")}
+          type="number"
+          className="form-control"
+          val={quantity}
+        ></input>
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Shipping</label>
+        <select onChange={handleChange("shipping")} className="form-control">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+      <button className="btn btn-outline-primary">Create Product</button>
+    </form>
+  );
 
   return (
     <Layout
