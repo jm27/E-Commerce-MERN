@@ -1,4 +1,4 @@
-import React , {Fragment} from "react";
+import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { signOut, isAuthenticated } from "../auth";
 const isActive = (history, path) => {
@@ -17,59 +17,76 @@ const Menu = ({ history }) => (
           Home
         </Link>
       </li>
-     {isAuthenticated() && isAuthenticated().user.role ===0 && (
-        <li className="nav-item">
-        <Link className="nav-link" style={isActive(history, "/user/dashboard")} to="/user/dashboard">
-          Dashboard
-        </Link>
-      </li>
-     )}
-     {isAuthenticated() && isAuthenticated().user.role ===1 && (
-        <li className="nav-item">
-        <Link className="nav-link" style={isActive(history, "/admin/dashboard")} to="/admin/dashboard">
-          Dashboard
-        </Link>
-      </li>
-     )}
-      {!isAuthenticated() && (
-          <Fragment>
-              <li className="nav-item">
-        <Link
-          className="nav-link"
-          style={isActive(history, "/signin")}
-          to="/signin"
-        >
-          Sign in
-        </Link>
-      </li>
       <li className="nav-item">
         <Link
           className="nav-link"
-          style={isActive(history, "/signup")}
-          to="/signup"
+          style={isActive(history, "/shop")}
+          to="/shop"
         >
-          Sign up
+          Shop
         </Link>
       </li>
-          </Fragment>
-      )}
-     {isAuthenticated() && (
-         <Fragment>
-          <li className="nav-item">
-          <span
+      {isAuthenticated() && isAuthenticated().user.role === 0 && (
+        <li className="nav-item">
+          <Link
             className="nav-link"
-            style={{ cursor: "pointer", color: "#ffffff" }}
-            onClick={() =>
-              signOut(() => {
-                history.push("/");
-              })
-            }
+            style={isActive(history, "/user/dashboard")}
+            to="/user/dashboard"
           >
-            Sign out
-          </span>
+            Dashboard
+          </Link>
         </li>
+      )}
+      {isAuthenticated() && isAuthenticated().user.role === 1 && (
+        <li className="nav-item">
+          <Link
+            className="nav-link"
+            style={isActive(history, "/admin/dashboard")}
+            to="/admin/dashboard"
+          >
+            Dashboard
+          </Link>
+        </li>
+      )}
+      {!isAuthenticated() && (
+        <Fragment>
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              style={isActive(history, "/signin")}
+              to="/signin"
+            >
+              Sign in
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              className="nav-link"
+              style={isActive(history, "/signup")}
+              to="/signup"
+            >
+              Sign up
+            </Link>
+          </li>
         </Fragment>
-     )}
+      )}
+      {isAuthenticated() && (
+        <Fragment>
+          <li className="nav-item">
+            <span
+              className="nav-link"
+              style={{ cursor: "pointer", color: "#ffffff" }}
+              onClick={() =>
+                signOut(() => {
+                  history.push("/");
+                })
+              }
+            >
+              Sign out
+            </span>
+          </li>
+        </Fragment>
+      )}
     </ul>
   </div>
 );

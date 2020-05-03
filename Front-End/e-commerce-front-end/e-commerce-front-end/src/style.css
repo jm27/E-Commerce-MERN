@@ -13,6 +13,16 @@
 }
 
 /* jumbotron Animation */
+.jumbotron h2 {
+    margin-top: -20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .jumbotron h2 {
+        margin-top:10px;
+    }
+}
+ 
 .jumbotron {
     width: 30wh;
     height: 30vh;
