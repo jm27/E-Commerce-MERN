@@ -71,15 +71,15 @@ const Shop = () => {
   };
 
   const loadMoreButton = () => {
-      return(
-        size>0 &&
-        size>= limit && (
-            <button onClick={loadMore} className='btn btn-warning mb-5'>
-                Load more
-            </button>
-        )
-                )
-  }
+    return (
+      size > 0 &&
+      size >= limit && (
+        <button onClick={loadMore} className="btn btn-warning mb-5">
+          Load more
+        </button>
+      )
+    );
+  };
 
   const handlePrice = (value) => {
     const data = prices;
@@ -98,7 +98,9 @@ const Shop = () => {
     return (
       <div className="row">
         {filteredResults.map((product, i) => (
-          <Card key={i} product={product}></Card>
+          <div key={i} className="col-4 mb-3">
+            <Card product={product} />
+          </div>
         ))}
       </div>
     );
@@ -130,7 +132,7 @@ const Shop = () => {
         <div className="col-8">
           <h2 className="mb-4">Products</h2>
           {displayResults()}
-          <hr/>
+          <hr />
           {loadMoreButton()}
         </div>
       </div>
