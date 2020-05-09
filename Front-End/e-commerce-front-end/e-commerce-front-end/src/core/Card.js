@@ -1,11 +1,17 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Image from "./Image";
 import moment from "moment";
-import {addItem} from './cartHelpers';
+import { addItem, updateItem } from "./cartHelpers";
 
-const Card = ({ product, showAddToCartButton = true, showViewProductButton = true }) => {
-  const [redirect, setRedirect] = useState(false)
+const Card = ({
+  product,
+  cartUpdate = false,
+  showAddToCartButton = true,
+  showViewProductButton = true,
+}) => {
+  const [redirect, setRedirect] = useState(false);
+  const [count, setCount] = useState(product.count);
   const showViewButton = (showViewProductButton) => {
     return (
       showViewProductButton && (
@@ -18,30 +24,62 @@ const Card = ({ product, showAddToCartButton = true, showViewProductButton = tru
     );
   };
 
-  const addToCart = ()=>{
-    addItem(product, ()=>{
-      setRedirect(true)
-    })
-  }
+  const addToCart = () => {
+    addItem(product, () => {
+      setRedirect(true);
+    });
+  };
 
-  const shouldRedirect = redirect =>{
-    if(redirect) {
-      return <Redirect to='/cart'></Redirect>
+  const shouldRedirect = (redirect) => {
+    if (redirect) {
+      return <Redirect to="/cart"></Redirect>;
+    }
+  };
+
+  const showAddToCart = (showAddToCartButton) => {
+    return (
+      showAddToCartButton && (
+        <button
+          onClick={addToCart}
+          className="btn btn-outline-warning mt-2 mb-2"
+        >
+          Add to cart
+        </button>
+      )
+    );
+  };
+  const showStock = (quantity) => {
+    return quantity > 0 ? (
+      <span className="badge badge-primary badge-pill">In Stock</span>
+    ) : (
+      <span className="badge badge-primary badge-pill">Out of Stock</span>
+    );
+  };
+
+  const handleChange = productId => event => {
+    setCount(event.target.value<1?1:event.target.value)
+    if(event.target.value>=1) {
+      updateItem(productId, event.tartget.value)
     }
   }
 
-  const showAddToCart = (showAddToCartButton)=>{
-    return showAddToCartButton && (
-      <button onClick={addToCart} className="btn btn-outline-warning mt-2 mb-2">
-          Add to cart
-        </button>
-    )
-  }
-  const showStock = (quantity)=>{
-    return quantity> 0
-          ? <span className='badge badge-primary badge-pill'>In Stock</span>
-          : <span className='badge badge-primary badge-pill'>Out of Stock</span>
-  }
+  const showCardUpdateOptions = (cartUpdate) => {
+    return (
+      cartUpdate && (
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text">Adjust Quantity</span>
+          </div>
+          <input
+            type="number"
+            className="form-control"
+            value={count}
+            onChange={handleChange(product._id)}
+          ></input>
+        </div>
+      )
+    );
+  };
 
   return (
     <div className="card">
@@ -58,9 +96,10 @@ const Card = ({ product, showAddToCartButton = true, showViewProductButton = tru
           Created: {moment(product.createdAt).fromNow()}
         </p>
         {showStock(product.quantity)}
-        <br/>
+        <br />
         {showViewButton(showViewProductButton)}
         {showAddToCart(showAddToCartButton)}
+        {showCardUpdateOptions(cartUpdate)}
       </div>
     </div>
   );
