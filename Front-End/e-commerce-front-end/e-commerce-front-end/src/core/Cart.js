@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import Card from "./Card";
-import { getCart } from "./cartHelpers";
+import { getCart, removeItem } from "./cartHelpers";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
@@ -17,7 +17,15 @@ const Cart = () => {
         <h2>Your cart has {`${items.length} items`}</h2>
         <hr />
         {items.map((p, i) => {
-          return <Card cartUpdate={true} key={i} showAddToCartButton={false} product={p}></Card>;
+          return (
+            <Card
+              cartUpdate={true}
+              key={i}
+              showAddToCartButton={false}
+              product={p}
+              showRemoveProductButton={true}
+            ></Card>
+          );
         })}
       </div>
     );
