@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // import {getProducts} from './apiCore'
 // import Card from './Card';
 
-const Checkout = ({ products }) => {
+const Checkout = ({ products, setRun = f => f, run = undefined }) => {
   const getTotal = () => {
     return products.reduce((currentValue, nextValue) => {
       return currentValue + nextValue.count * nextValue.price;
