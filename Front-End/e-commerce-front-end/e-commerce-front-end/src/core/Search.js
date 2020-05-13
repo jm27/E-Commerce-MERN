@@ -93,11 +93,11 @@ const Search = () => {
     return (
       <div>
         <h2 className="mt-4 mb-4">{searchMessage(searched, results)}</h2>
-        <dic className="row">
+        <div className="row">
           {results.map((product, i) => (
             <Card key={i} product={product}></Card>
           ))}
-        </dic>
+        </div>
       </div>
     );
   };

@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 // import Layout from './Layout';
-import { getProducts, getBrainTreeClientToken } from "../admin/apiCore";
+import {
+  getProducts,
+  getBrainTreeClientToken,
+  processPayment,
+} from "../admin/apiCore";
+import {emptyCart} from './cartHelpers'
 // import Card from './Card';
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
@@ -23,7 +28,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
       if (data.error) {
         setData({ ...data, error: data.error });
       } else {
-        setData({ ...data, clientToken: data.clientToken });
+        setData({ clientToken: data.clientToken });
       }
     });
   };
@@ -38,28 +43,58 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
     }, 0);
   };
 
-  const buy =() => {
+  const buy = () => {
     // send payment method to your server
     let nonce;
-    let getNonce = data.instance.requestPaymentMethod()
-    .then(data => {
-      console.log(data)
-      nonce =data.nonce
-      //with nonce send as paymentMethod to the backEnd
-      // with total
+    let getNonce = data.instance
+      .requestPaymentMethod()
+      .then((data) => {
+        nonce = data.nonce;
+        //with nonce send as paymentMethod to the backEnd
+        // with total
+        const paymentData = {
+          paymentMethodNonce: nonce,
+          amount: getTotal(products),
+        };
 
-    })
-    .catch(error=>{
-      console.log('dropin error: ', error)
-      setData({...data, error:error.message})
-    })
-  }
+        processPayment(userId, token, paymentData)
+          .then((response) => {
+            setData({ ...data, success: response.success });
+            // empty cart
+            emptyCart(()=>{
+              setRun(!run);
+              setData({
+                loading: false,
+                success:true
+              })
+              console.log('payment success and empty cart')
+            })
+            // create order
+          })
+          .catch((error) => {console.log(error);
+          setData({loading:false})});
+      })
+      .catch((error) => {
+        setData({ ...data, error: error.message });
+      });
+  };
 
-  const showError = (error) =>(
-    <div className='alert alert-danger' style={{display:error?'':'none'}} >
+  const showError = (error) => (
+    <div
+      className="alert alert-danger"
+      style={{ display: error ? "" : "none" }}
+    >
       {error}
     </div>
-  )
+  );
+  const showSuccess = (success) => (
+    <div
+      className="alert alert-info"
+      style={{ display: success ? "" : "none" }}
+    >
+      Thanks payment was successful!{" "}
+    </div>
+  );
 
   const showCheckout = () => {
     return isAuthenticated() ? (
@@ -72,16 +107,21 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
   };
 
   const showDropIn = () => (
-    <div onBlur={()=> setData({...data, error:''})}>
+    <div onBlur={() => setData({ ...data, error: "" })}>
       {data.clientToken !== null && products.length > 0 ? (
         <div>
           <DropIn
             options={{
               authorization: data.clientToken,
+              paypal: {
+                flow: 'vault',
+              }
             }}
             onInstance={(instance) => (data.instance = instance)}
           ></DropIn>
-          <button onClick={buy} className="btn btn-success">Buy</button>
+          <button onClick={buy} className="btn btn-success btn-block">
+            Buy
+          </button>
         </div>
       ) : null}
     </div>
@@ -90,6 +130,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
     <div>
       <h2>Total: ${getTotal()}</h2>
       {showError(data.error)}
+      {showSuccess(data.success)}
       {showCheckout()}
     </div>
   );
