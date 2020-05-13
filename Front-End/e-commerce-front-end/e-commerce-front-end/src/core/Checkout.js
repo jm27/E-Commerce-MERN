@@ -4,6 +4,7 @@ import {
   getProducts,
   getBrainTreeClientToken,
   processPayment,
+  createOrder,
 } from "../admin/apiCore";
 import { emptyCart } from "./cartHelpers";
 // import Card from './Card';
@@ -61,6 +62,14 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 
         processPayment(userId, token, paymentData)
           .then((response) => {
+            const createOrderData = {
+              products: products,
+              transaction_id: response.transaction.id,
+              amount: response.transaction.amount,
+              address: data.address,
+            };
+            createOrder(userId, token, createOrderData);
+
             setData({ ...data, success: response.success });
             // empty cart
             emptyCart(() => {
@@ -83,9 +92,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
       });
   };
 
-  const showLoading = loading =>(
-    loading && <h2> Loading...</h2>
-  )
+  const showLoading = (loading) => loading && <h2> Loading...</h2>;
 
   const showError = (error) => (
     <div
@@ -114,10 +121,23 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
     );
   };
 
+  const handleAddress = event => {
+    setData({...data, address:event.target.value})
+  }
+
   const showDropIn = () => (
     <div onBlur={() => setData({ ...data, error: "" })}>
       {data.clientToken !== null && products.length > 0 ? (
         <div>
+          <div className="form-group mb-3">
+            <label className="text-muted">Delivery address:</label>
+            <textarea
+              onChange={handleAddress}
+              className="form-control"
+              value={data.address}
+              placeholder="Type here your delivery address"
+            ></textarea>
+          </div>
           <DropIn
             options={{
               authorization: data.clientToken,
