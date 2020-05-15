@@ -45,6 +45,8 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
     }, 0);
   };
 
+  let deliveryAddress = data.address
+
   const buy = () => {
     setData({ loading: true });
     // send payment method to your server
@@ -66,7 +68,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
               products: products,
               transaction_id: response.transaction.id,
               amount: response.transaction.amount,
-              address: data.address,
+              address:deliveryAddress,
             };
             createOrder(userId, token, createOrderData);
 
@@ -121,9 +123,9 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
     );
   };
 
-  const handleAddress = event => {
-    setData({...data, address:event.target.value})
-  }
+  const handleAddress = (event) => {
+    setData({ ...data, address: event.target.value });
+  };
 
   const showDropIn = () => (
     <div onBlur={() => setData({ ...data, error: "" })}>
