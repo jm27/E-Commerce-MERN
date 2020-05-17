@@ -3,6 +3,7 @@ import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import { listOrders } from "./apiAdmin";
+import moment from "moment";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -45,22 +46,29 @@ const Orders = () => {
                 key={oIndex}
                 style={{ borderBottom: "5px solid indigo" }}
               >
-                  <h2 className='mb-5'>
-                      <span className='bg-primary'>
-                          Order ID: {o._id}
-                      </span>
-                  </h2>
-                  <ul className='list-group mb-2'>
-                      <li className='list-group-item'>
-                          Transaction ID: {o.transaction_id}
-                      </li>
-                      <li className='list-group-item'>
-                          Transaction ID: {o.transaction_id}
-                      </li>
-                      <li className='list-group-item'>
-                          Transaction ID: {o.transaction_id}
-                      </li>
-                  </ul>
+                <h2 className="mb-5">
+                  <span className="bg-primary">Order ID: {o._id}</span>
+                </h2>
+                <ul className="list-group mb-2">
+                  <li className="list-group-item">
+                {o.status}
+                  </li>
+                  <li className="list-group-item">
+                    Transaction ID: {o.transaction_id}
+                  </li>
+                  <li className="list-group-item">Amount: {o.amount}</li>
+                  <li className="list-group-item">Ordered by: {o.user.name}</li>
+                  <li className="list-group-item">
+                    Ordered on: {moment(o.createdAt).fromNow()}
+                  </li>
+                  <li className="list-group-item">
+                    Delivery address: {o.address}
+                  </li>
+                </ul>
+
+                <h3 className="mt-4 mb-4 font-italic">
+                  Total products in the order: {o.products.length}
+                </h3>
               </div>
             );
           })}
