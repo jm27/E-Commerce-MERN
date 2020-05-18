@@ -35,16 +35,52 @@ const Profile = ({ match }) => {
     init(match.params.userId);
   }, []);
 
-  return(
+  const handleChange = (e) => {};
+  const clickSubmit = (e) => {};
 
-  <Layout
-    title="Profile"
-    description="Update profile information"
-    className="container-fluid"
-  >
-    <h2 className="mb-4">Update profile</h2>
-    {JSON.stringify(values)}
-  </Layout>)
+  const profileUpdate = (name, email, password) => (
+    <form>
+      <div className="form-group">
+        <label className="text-muted">Name</label>
+        <input
+          type="text"
+          onChange={handleChange("name")}
+          className="form-control"
+          value={name}
+        ></input>
+      </div>
+      <div className="form-group">
+        <label className="text-muted">Email</label>
+        <input
+          type="text"
+          onChange={handleChange("email")}
+          className="form-control"
+          value={email}
+        ></input>
+      </div>
+      <div className="form-group">
+        <label className="text-muted">password</label>
+        <input
+          type="text"
+          onChange={handleChange("password")}
+          className="form-control"
+          value={password}
+        ></input>
+      </div>
+      <button className='btn btn-primary' onClick={clickSubmit}>Submit</button>
+    </form>
+  );
+
+  return (
+    <Layout
+      title="Profile"
+      description="Update profile information"
+      className="container-fluid"
+    >
+      <h2 className="mb-4">Update profile</h2>
+      {profileUpdate(name, email, password)}
+    </Layout>
+  );
 };
 
 export default Profile;
