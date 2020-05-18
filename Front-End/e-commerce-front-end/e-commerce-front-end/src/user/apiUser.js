@@ -1,4 +1,4 @@
-import { API } from "../config";
+import  API  from "../config";
 
 export const read = (userId, token) => {
   return fetch(`${API}/user/${userId}`, {
@@ -15,7 +15,7 @@ export const read = (userId, token) => {
     .catch((error) => console.log(error));
 };
 
-export const updateUser = (userId, token, user) => {
+export const update = (userId, token, user) => {
   return fetch(`${API}/user/${userId}`, {
     method: "PUT",
     headers: {
