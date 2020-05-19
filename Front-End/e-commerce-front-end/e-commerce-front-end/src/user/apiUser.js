@@ -1,4 +1,4 @@
-import  API  from "../config";
+import API from "../config";
 
 export const read = (userId, token) => {
   return fetch(`${API}/user/${userId}`, {
