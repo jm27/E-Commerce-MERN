@@ -87,7 +87,7 @@ export const updateOrderStatus = (userId, token, orderId, status) => {
 
 // We need get all products, single product, update, delete
 export const getProducts = () => {
-  return fetch(`${API}/products`, {
+  return fetch(`${API}/products?limit=undefined`, {
     method: "GET",
   })
     .then((response) => {
