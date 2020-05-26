@@ -15,81 +15,109 @@ git clone git@github.com:jm27/E-Commerce-MERN.git
 There is a demo of this app available on github. You can interact with the app and see the full functionality. 
 Here are some of the Application features:
 
--Search product
+*Search product
 
--Search products based on particular category
+*Search products based on particular category
 
--New arrivals
+*New arrivals
 
--Best sellers
+*Best sellers
 
--Product image
+*Product image
 
--Product information
+*Product information
 
--Product in stock/out of stock
+*Product in stock/out of stock
 
--View product
+*View product
 
--Related product
+*Related product
 
--Add to cart
+*Add to cart
 
--Remove product
+*Remove product
 
--Adjust quantity
+*Adjust quantity
 
--Signin to checkout
+*Signin to checkout
 
--User dashboard
+*User dashboard
 
--Admin dashboard
+*Admin dashboard
 
--Private routes
+*Private routes
 
--Admin routes
+*Admin routes
 
--Shopping cart
+*Shopping cart
 
--Checkout with credit card and paypal
+*Checkout with credit card and paypal
 
--Checkout with delivery address
+*Checkout with delivery address
 
--Success message
+*Success message
 
--Update profile
+*Update profile
 
--Advance search of products
+*Advance search of products
 
--Advance search based on category and price range
+*Advance search based on category and price range
 
--Load more products
+*Load more products
 
--Admin dashboard
+*Admin dashboard
 
--Create category
+*Create category
 
--Create product
+*Create product
 
--View orders
+*View orders
 
--Manage products update/delete
+*Manage products update/delete
 
--Role based access
+*Role based access
 
 ## Visit Demo Site
 
-[Etch-A-Sketch LINK](https://jm27.github.io/Etch-A-Sketch/ "Homepage")
+[E-Commerce-MERN LINK](https://ecomlearnshop.com// "Homepage")
 ======
 
 ## Built With
 
-* HTML.
-* CSS.
-* JavaScript
+* Mongo DB
+* Express.js
+* React.js (Hooks!)
+* Node.js
+
+* NPM dependencies:
+
+* "braintree-web-drop-in-react": "^1.1.1",
+* "g": "^2.0.1",
+* "moment": "^2.25.3",
+* "query-string": "^6.12.1",
+* "react": "^16.13.1",
+* "react-dom": "^16.13.1",
+* "react-router-dom": "^5.1.2",
+* "react-scripts": "3.4.1"
+* "@sendgrid/mail": "^7.1.1",
+* "body-parser": "^1.19.0",
+* "braintree": "^2.22.0",
+* "cookie-parser": "^1.4.5",
+* "cors": "^2.8.5",
+* "dotenv": "^8.2.0",
+* "express": "^4.17.1",
+* "express-jwt": "^5.3.1",
+* "express-validator": "^5.3.1",
+* "formidable": "^1.2.2",
+* "fs": "0.0.1-security",
+* "jsonwebtoken": "^8.5.1",
+* "lodash": "^4.17.15",
+* "mongoose": "^5.9.6",
+* "morgan": "^1.10.0",
+* "uuid": "^7.0.2"
 
 ## Versioning
-Etch-A-Sketch V1.1
+E-Commerce-MERN V1.1
 
 ## Authors
 
@@ -100,3 +128,4 @@ Etch-A-Sketch V1.1
 
 * Thanks to Classmates, Instructors, and TA's .
 * Bootcamp 2019-2020.
+* Ryan Dhungel - Web Developer
