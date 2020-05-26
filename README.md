@@ -89,7 +89,7 @@ Here are some of the Application features:
 * React.js (Hooks!)
 * Node.js
 
-* NPM dependencies:
+## NPM dependencies:
 
 * "braintree-web-drop-in-react": "^1.1.1",
 * "g": "^2.0.1",
