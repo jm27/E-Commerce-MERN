@@ -88,6 +88,7 @@ Here are some of the Application features:
 * Express.js
 * React.js (Hooks!)
 * Node.js
+* CSS
 
 ## NPM dependencies:
 
