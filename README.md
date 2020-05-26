@@ -79,7 +79,7 @@ Here are some of the Application features:
 
 ## Visit Demo Site
 
-[E-Commerce-MERN LINK](https://ecomlearnshop.com// "Homepage")
+[E-Commerce-MERN LINK](https://ecomlearnshop.com/ "Homepage")
 ======
 
 ## Built With
