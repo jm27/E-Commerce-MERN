@@ -15,67 +15,67 @@ git clone git@github.com:jm27/E-Commerce-MERN.git
 There is a demo of this app available on github. You can interact with the app and see the full functionality. 
 Here are some of the Application features:
 
-*Search product
+* Search product
 
-*Search products based on particular category
+* Search products based on particular category
 
-*New arrivals
+* New arrivals
 
-*Best sellers
+* Best sellers
 
-*Product image
+* Product image
 
-*Product information
+* Product information
 
-*Product in stock/out of stock
+* Product in stock/out of stock
 
-*View product
+* View product
 
-*Related product
+* Related product
 
-*Add to cart
+* Add to cart
 
-*Remove product
+* Remove product
 
-*Adjust quantity
+* Adjust quantity
 
-*Signin to checkout
+* Signin to checkout
 
-*User dashboard
+* User dashboard
 
-*Admin dashboard
+* Admin dashboard
 
-*Private routes
+* Private routes
 
-*Admin routes
+* Admin routes
 
-*Shopping cart
+* Shopping cart
 
-*Checkout with credit card and paypal
+* Checkout with credit card and paypal
 
-*Checkout with delivery address
+* Checkout with delivery address
 
-*Success message
+* Success message
 
-*Update profile
+* Update profile
 
-*Advance search of products
+* Advance search of products
 
-*Advance search based on category and price range
+* Advance search based on category and price range
 
-*Load more products
+* Load more products
 
-*Admin dashboard
+* Admin dashboard
 
-*Create category
+* Create category
 
-*Create product
+* Create product
 
-*View orders
+* View orders
 
-*Manage products update/delete
+* Manage products update/delete
 
-*Role based access
+* Role based access
 
 ## Visit Demo Site
 
