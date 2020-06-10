@@ -13,9 +13,7 @@ git clone git@github.com:jm27/E-Commerce-MERN.git
 
 ## Demo
 <!-- blank line -->
-<figure class="video_container">
-  <iframe src="https://youtu.be/0fxjBxIJQHw" frameborder="0" allowfullscreen="true"> </iframe>
-</figure>
+![homepage](gif/E-com-demo.gif)
 <!-- blank line -->
 There is a demo of this app available on github. You can interact with the app and see the full functionality. 
 Here are some of the Application features:
