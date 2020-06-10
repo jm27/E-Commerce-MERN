@@ -14,7 +14,7 @@ git clone git@github.com:jm27/E-Commerce-MERN.git
 ## Demo
 <!-- blank line -->
 <figure class="video_container">
-  <iframe src="https://drive.google.com/file/d/1x2t_14XvZzYnRhV08qywI9Uja8bn_eN_/view?usp=sharing" frameborder="0" allowfullscreen="true"> </iframe>
+  <iframe src="https://youtu.be/0fxjBxIJQHw" frameborder="0" allowfullscreen="true"> </iframe>
 </figure>
 <!-- blank line -->
 There is a demo of this app available on github. You can interact with the app and see the full functionality. 
